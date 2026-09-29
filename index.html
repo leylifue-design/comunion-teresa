@@ -162,6 +162,8 @@
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 0 8px 24px #40505a0c;
+            display: flex;
+            flex-direction: column;
         }
 
         .photo {
@@ -180,21 +182,27 @@
             position: absolute;
             inset: 12px;
             border: 1px dashed #9eb2bf55;
+            pointer-events: none;
         }
 
         .photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
 
         .body {
-            padding: 19px;
+                padding: 18px;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
         }
 
         .body h3 {
-            font-size: 22px;
-            font-weight: 400;
+            font-size: 21px;
+            font-weight: 600;
             margin: 0 0 7px;
             color: #4c687a;
         }
@@ -202,7 +210,8 @@
         .desc {
             font: 13px/1.5 Arial, sans-serif;
             color: var(--muted);
-            min-height: 39px;
+            margin-top: 8px;
+            margin-bottom: 15px;
         }
 
         .bottom {
@@ -211,11 +220,6 @@
             align-items: center;
             margin-top: 18px;
             gap: 10px;
-        }
-
-        .price {
-            font: bold 14px Arial, sans-serif;
-            color: var(--gold);
         }
 
         button {
@@ -232,11 +236,8 @@
             background: #edf3f5;
         }
 
-        button:disabled {
-            border-color: #c7c7c7;
-            color: #999;
-            background: #f1f1f1;
-            cursor: default;
+        .reserve-button {
+        margin-top: auto;
         }
 
         .status {
@@ -653,6 +654,10 @@
                                 <h3>
                                     ${escapeHtml(gift.name)}
                                 </h3>
+
+                                <div class="desc">
+                                    ${escapeHtml(gift.description || "")}
+                                </div>
 
                                 <button
                                     class="reserve-button"
