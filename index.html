@@ -627,11 +627,8 @@
 
 
             grid.innerHTML = gifts
+                .filter(gift => !reservations.has(gift.id))
                 .map(gift => {
-
-                    const reserved =
-                        reservations.has(gift.id);
-
 
                     const photo =
                         gift.image_url
@@ -642,13 +639,6 @@
                                 >
                               `
                             : "✦";
-
-
-                    const price =
-                        gift.price != null
-                            ? `${Number(gift.price)
-                                .toLocaleString("es-ES")} €`
-                            : "";
 
 
                     return `
@@ -664,34 +654,12 @@
                                     ${escapeHtml(gift.name)}
                                 </h3>
 
-                                <div class="desc">
-                                    ${escapeHtml(
-                                        gift.description || ""
-                                    )}
-                                </div>
-
-                                <div class="bottom">
-
-                                    <span class="price">
-                                        ${price}
-                                    </span>
-
-                                    <button
-                                        ${reserved ? "disabled" : ""}
-                                        onclick="openModal(${gift.id})"
-                                    >
-                                        ${reserved
-                                            ? "Reservado"
-                                            : "Reservar"}
-                                    </button>
-
-                                </div>
-
-                                <div class="status">
-                                    ${reserved
-                                        ? "🔒 Ya reservado"
-                                        : "● Disponible"}
-                                </div>
+                                <button
+                                    class="reserve-button"
+                                    onclick="openModal(${gift.id})"
+                                >
+                                    Reservar
+                                </button>
 
                             </div>
 
